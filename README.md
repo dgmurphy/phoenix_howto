@@ -1,6 +1,6 @@
 # Open Event Data Alliance Phoenix Pipeline Install & Test
 
-A step-by-step guide to running Pheonix for the purpose of updating the dictionaries for Actors, Agents, and Issues.
+A step-by-step guide to running Phoenix for the purpose of updating the dictionaries for Actors, Agents, and Issues.
 
 These instructions will set up the following tools:
 
@@ -254,13 +254,19 @@ Before proceeding, deactivate your scraper virtual environment:
 
 ## Install and Test the Phoenix Pipeline
 
-The Phoenix Pipeline takes the sentence content and the parse trees and produces events using the Petrarch event coder. Petrach includes a number of data dictionaries including the CAMEO event codes, Actor, Agent and Issues dictionaries, and a Discards list. Read more about Petrarch here:
+The Phoenix Pipeline takes the sentence content and the parse trees and produces events using the Petrarch event coder. Petrach includes a number of data dictionaries including the CAMEO event codes, Actor, Agent and Issues dictionaries, and a Discards list. 
+
+Read more about Petrarch here:
 
 https://petrarch.readthedocs.io/
 
 Read more about the Phoenix Pipeline here:
 
-https://github.com/dgmurphy/phoenix_pipeline
+https://github.com/dgmurphy/phoenix_pipeline 
+
+and here:
+
+https://phoenix-pipeline.readthedocs.io/en/latest/
 
 Note: this version of the pipeline has Geocoding disabled. Events will not be location coded but the source sentence will be saved with each event so a seperate process can be used to perform sentence-level geocoding.
 
@@ -293,5 +299,26 @@ NOTE: To process events on the same day they were collected, set the run_date to
 ```python pipeline.py```
 
 
+The pipeline should produce a csv file e.g.:
+
+`events.full.20200713.csv`
+
+Open this file in LibreOffice to view it.  For the seperator options use:
+```
+Seperated by: Tab only
+String delimeter: '   (single quote)
 
 
+## Edit the Petrarch Dictionaries
+
+See the documentation here for instructions on how to edit the dictionaries:
+
+https://petrarch.readthedocs.io/en/latest/dictionaries.html
+
+See these notes for detecting new actors:
+
+```
+Detecting actors which are not in the dictionary
+
+Because PETRARCH uses parsed input, it has the option of detecting actors—noun phrases—which are not in the dictionary. This is set using the new_actor_length option in the PETR_config.ini file: see the description of that file for details.
+```
