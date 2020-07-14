@@ -30,7 +30,7 @@ Check:
 
 ### Install virtualenv
 
-```pip install virtualenv```
+```sudo apt install virtualenv```
 
 Check:
 
