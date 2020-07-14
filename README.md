@@ -15,6 +15,8 @@ These instructions were tested on Ubuntu 18.04.  You should have basic knowledge
 
 Make sure you have at least X GB of disk space available.
 
+Note: These instructions have known problems on Ubuntu 20 due to limited Python2 lib support.
+
 
 ### Install Git
 
