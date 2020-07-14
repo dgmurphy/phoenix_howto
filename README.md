@@ -325,6 +325,13 @@ String delimeter: '   (single quote)
 
 ## Edit the Petrarch Dictionaries
 
+If the Petrarch coder does not find at least two actors in a sentence then it will not generate any events.  Many named entities that should count as actors or agents do not get coded because their names are not in the dictionary. To update these dictionaries we need to identify missing actors/agents and add them to the dictionary. The process will generally be as follows:
+
+* Collect 'dead' sentences from the pipeline (sentences that did not generate any events).
+* Run the dead sentences through the Petrarch event coder in "Null Actor Mode" which will identify the labels for the named entities that are missing from the dictionary (e.g. "Dr. Fauci".
+* Add the labels for Dr. Fauci (e.g. "Anthony Fauci", "Dr. Anthony Fauci" etc.) and any other missing named entities to the Actor/Agent dictionaries using the CAMEO coding scheme.
+* Re-run the dead sentence through the coder to make sure the new Actor/Agent code is detected.
+
 See the documentation here for instructions on how to edit the dictionaries:
 
 https://petrarch.readthedocs.io/en/latest/dictionaries.html
