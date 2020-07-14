@@ -123,6 +123,10 @@ Install the setuptools library (this step required for nltk install)
 
 ```pip install setuptools==9.1```
 
+Install the libxml dependecies:
+
+```sudo apt-get install libxml2-dev libxslt-dev python-dev```
+
 Unzip the nltk library file:
 
 ```tar -xzvf nltk-2.0.4.tgz```
