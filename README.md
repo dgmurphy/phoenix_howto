@@ -318,7 +318,7 @@ The pipeline should produce a csv file e.g.:
 `events.full.20200713.csv`
 
 Open this file in LibreOffice to view it.  For the seperator options use:
-```
+
 Seperated by: Tab only
 String delimeter: '   (single quote)
 
