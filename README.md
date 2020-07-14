@@ -24,6 +24,10 @@ Check:
 
 ```git --version```
 
+### Install pip
+
+```sudo apt-get install python-pip```
+
 ### Install virtualenv
 
 ```pip install virtualenv```
