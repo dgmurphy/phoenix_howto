@@ -285,7 +285,7 @@ https://phoenix-pipeline.readthedocs.io/en/latest/
 Note: this version of the pipeline has Geocoding disabled. Events will not be location coded but the source sentence will be saved with each event so a seperate process can be used to perform sentence-level geocoding.
 
 
-## Clone the Repo
+### Clone the Repo
 
 In the oeda directory:
 
