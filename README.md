@@ -161,7 +161,11 @@ You should see a number of "added entry" lines with news article urls.
 
 ### View the Scraped Stories in MongoDB
 
-Open the Robo 3T application and from the Connection dialog select the Event Pipeline connection.
+Open the Robo 3T application. E.g
+
+`~/robo3t-1.3.1-linux-x86_64-7419c406/bin/robo3t`
+
+From the Connection dialog select the Event Pipeline connection.
 
 Check: Robo 3T should connect and you should see a database called "event_scrape"
 
