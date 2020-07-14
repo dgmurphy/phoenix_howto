@@ -13,7 +13,7 @@ These instructions will set up the following tools:
 
 These instructions were tested on Ubuntu 18.04.  You should have basic knowledge of Linux, Git, and Python.
 
-Make sure you have at least X GB of disk space available.
+Make sure you have at least 4 GB of disk space available for this project.
 
 Note: These instructions have known problems on Ubuntu 20 due to limited Python2 lib support.
 
