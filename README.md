@@ -45,6 +45,9 @@ Check:
 
 ```python2 --version```
 
+### Install Java 8
+TBD
+
 ### Make a project dir
 Create a directory for this project:
 
