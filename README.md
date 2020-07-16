@@ -322,9 +322,9 @@ The pipeline should produce a csv file e.g.:
 
 Open this file in LibreOffice to view it.  For the seperator options use:
 
-Seperated by: Tab only
-String delimeter: '   (single quote)
-```
+* Seperated by: Tab only
+* String delimeter: '   (single quote)
+
 
 
 ## Use the Sentence Tester
@@ -337,7 +337,8 @@ cd petrarch_sentence_tester
 virtualenv -p /usr/bin/python2.7 venv
 source venv/bin/activate
 pip install -r requirements.txt
-
+```
+```
 cd stanford_corenlp_pywrapper
 wget http://nlp.stanford.edu/software/stanford-corenlp-full-2014-06-16.zip
 unzip stanford-corenlp-full-2014-06-16.zip
@@ -369,8 +370,7 @@ Result: One event is generated and we see that the word 'governors' has a code (
 Actors for event 1
 	Soure actor: Dr. Fauci => *1*
 	Target actor: governors <GOVERNORS> =>  *2*GOV
-	Verb code:  130
-
+	Verb code:  130s
 ```
 
 If we add Dr. Fauci to the actor dictionary then this sentence will generate an event in standard mode.
