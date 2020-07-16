@@ -307,9 +307,42 @@ Open this file in LibreOffice to view it.  For the seperator options use:
 ```
 Seperated by: Tab only
 String delimeter: '   (single quote)
+```
 
 
-## Edit the Petrarch Dictionaries
+
+## Use the Sentence Tester
+
+The sentence tester will let you run the petrarch coder on a list of sentences in one of two modes:
+
+1) Standard Mode: Two coded actors and a coded verb must be found in the dictionaries, othwerwise no events will be generated.
+
+2) Null Actors Mode:  If two uncoded actors and a coded verb are found, then events are generated using the actor names from the sentence. You can use these names to add the actors to the dictionaries.
+
+EXAMPLE SENTENCE:
+
+`Dr. Fauci warned governors that the pandemic could surge if masks are not worn.`
+
+Run `python test_parse.py s`  (standard mode)
+
+Result: No events generated because Dr. Fauci is not in the actor dictionaries.
+
+Run `python test_parse.py n`  (null actors mode)
+
+Result: One event is generated and we see that the word 'governors' has a code ("GOV") but Dr. Fauci does not. 
+```
+Actors for event 1
+	Soure actor: Dr. Fauci => *1*
+	Target actor: governors <GOVERNORS> =>  *2*GOV
+	Verb code:  130
+
+```
+
+If we add Dr. Fauci to the actor dictionary then this sentence will generate an event in standard mode.
+
+TODO: This sentence will also code an issue for PANDEMIC. Modify the output to show the coded issues.
+
+## Learn How to Edit the Petrarch Dictionaries
 
 See the documentation here for instructions on how to edit the dictionaries:
 
@@ -322,3 +355,14 @@ Detecting actors which are not in the dictionary
 
 Because PETRARCH uses parsed input, it has the option of detecting actors—noun phrases—which are not in the dictionary. This is set using the new_actor_length option in the PETR_config.ini file: see the description of that file for details.
 ```
+
+## Find Uncoded actors and Update the Dictionaries
+
+Run the phoenix-pipeline in null actors mode and collect the sentences with uncoded actors.
+
+Put these sentences into the sentence tester input file and run it in null actors mode to view the actor labels.
+
+Update the actor dictionaries using the CAMEO codebook and the actor labels.
+
+Re-run the sentence tester to make sure the updated dictionaries produced coded events with the new actor codes.
+
