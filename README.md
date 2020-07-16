@@ -13,7 +13,9 @@ These instructions will set up the following tools:
 
 These instructions were tested on Ubuntu 18.04.  You should have basic knowledge of Linux, Git, and Python.
 
-Make sure you have at least X GB of disk space available.
+Make sure you have at least 4 GB of disk space available for this project.
+
+Note: These instructions have known problems on Ubuntu 20 due to limited Python2 lib support.
 
 
 ### Install Git
@@ -24,9 +26,13 @@ Check:
 
 ```git --version```
 
+### Install pip
+
+```sudo apt-get install python-pip```
+
 ### Install virtualenv
 
-```pip install virtualenv```
+```sudo apt install virtualenv```
 
 Check:
 
@@ -38,6 +44,9 @@ Comes with Ubuntu.
 Check:
 
 ```python2 --version```
+
+### Install Java 8
+TBD
 
 ### Make a project dir
 Create a directory for this project:
@@ -119,6 +128,10 @@ Install the setuptools library (this step required for nltk install)
 
 ```pip install setuptools==9.1```
 
+Install the libxml dependecies:
+
+```sudo apt-get install libxml2-dev libxslt-dev python-dev```
+
 Unzip the nltk library file:
 
 ```tar -xzvf nltk-2.0.4.tgz```
@@ -153,7 +166,11 @@ You should see a number of "added entry" lines with news article urls.
 
 ### View the Scraped Stories in MongoDB
 
-Open the Robo 3T application and from the Connection dialog select the Event Pipeline connection.
+Open the Robo 3T application. E.g
+
+`~/robo3t-1.3.1-linux-x86_64-7419c406/bin/robo3t`
+
+From the Connection dialog select the Event Pipeline connection.
 
 Check: Robo 3T should connect and you should see a database called "event_scrape"
 
@@ -271,7 +288,7 @@ https://phoenix-pipeline.readthedocs.io/en/latest/
 Note: this version of the pipeline has Geocoding disabled. Events will not be location coded but the source sentence will be saved with each event so a seperate process can be used to perform sentence-level geocoding.
 
 
-## Clone the Repo
+### Clone the Repo
 
 In the oeda directory:
 
@@ -304,11 +321,10 @@ The pipeline should produce a csv file e.g.:
 `events.full.20200713.csv`
 
 Open this file in LibreOffice to view it.  For the seperator options use:
-```
+
 Seperated by: Tab only
 String delimeter: '   (single quote)
 ```
-
 
 
 ## Use the Sentence Tester
@@ -344,25 +360,14 @@ TODO: This sentence will also code an issue for PANDEMIC. Modify the output to s
 
 ## Learn How to Edit the Petrarch Dictionaries
 
+If the Petrarch coder does not find at least two actors in a sentence then it will not generate any events.  Many named entities that should count as actors or agents do not get coded because their names are not in the dictionary. To update these dictionaries we need to identify missing actors/agents and add them to the dictionary. The process will generally be as follows:
+
+* Collect 'dead' sentences from the pipeline (sentences that did not generate any events).
+* Run the dead sentences through the sentence tester in "Null Actor Mode" which will identify the labels for the named entities that are missing from the dictionary (e.g. "Dr. Fauci").
+* Add the labels for Dr. Fauci (e.g. "Anthony Fauci", "Dr. Anthony Fauci" etc.) and any other missing named entities to the Actor/Agent dictionaries using the CAMEO coding scheme.
+* Re-run the dead sentence through the tester to make sure the new Actor/Agent code is detected.
+
 See the documentation here for instructions on how to edit the dictionaries:
 
 https://petrarch.readthedocs.io/en/latest/dictionaries.html
-
-See these notes for detecting new actors:
-
-```
-Detecting actors which are not in the dictionary
-
-Because PETRARCH uses parsed input, it has the option of detecting actors—noun phrases—which are not in the dictionary. This is set using the new_actor_length option in the PETR_config.ini file: see the description of that file for details.
-```
-
-## Find Uncoded actors and Update the Dictionaries
-
-Run the phoenix-pipeline in null actors mode and collect the sentences with uncoded actors.
-
-Put these sentences into the sentence tester input file and run it in null actors mode to view the actor labels.
-
-Update the actor dictionaries using the CAMEO codebook and the actor labels.
-
-Re-run the sentence tester to make sure the updated dictionaries produced coded events with the new actor codes.
 
