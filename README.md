@@ -329,6 +329,25 @@ String delimeter: '   (single quote)
 
 ## Use the Sentence Tester
 
+### Install
+
+``` 
+git clone https://github.com/dgmurphy/petrarch_sentence_tester.git
+cd petrarch_sentence_tester
+virtualenv -p /usr/bin/python2.7 venv
+source venv/bin/activate
+pip install -r requirements.txt
+
+cd stanford_corenlp_pywrapper
+wget http://nlp.stanford.edu/software/stanford-corenlp-full-2014-06-16.zip
+unzip stanford-corenlp-full-2014-06-16.zip
+mv stanford-corenlp-full-2014-06-16 stanford-corenlp
+cd stanford-corenlp
+wget http://nlp.stanford.edu/software/stanford-srparser-2014-07-01-models.jar
+```
+
+### Use
+
 The sentence tester will let you run the petrarch coder on a list of sentences in one of two modes:
 
 1) Standard Mode: Two coded actors and a coded verb must be found in the dictionaries, othwerwise no events will be generated.
