@@ -329,6 +329,12 @@ Open this file in LibreOffice to view it.  For the seperator options use:
 
 ## Use the Sentence Tester
 
+The sentence tester will let you run the petrarch coder on a list of sentences in one of two modes:
+
+1) Standard Mode: Two coded actors and a coded verb must be found in the dictionaries, othwerwise no events will be generated.
+
+2) Null Actors Mode:  If two uncoded actors and a coded verb are found, then events are generated using the actor names from the sentence. You can use these names to add the actors to the dictionaries.
+
 ### Install
 
 ``` 
@@ -349,15 +355,13 @@ wget http://nlp.stanford.edu/software/stanford-srparser-2014-07-01-models.jar
 
 ### Use
 
-The sentence tester will let you run the petrarch coder on a list of sentences in one of two modes:
+Add sentences to the file `input.txt`
 
-1) Standard Mode: Two coded actors and a coded verb must be found in the dictionaries, othwerwise no events will be generated.
+Each sentence must have a date so that the actors can be coded using their valid time ranges.
 
-2) Null Actors Mode:  If two uncoded actors and a coded verb are found, then events are generated using the actor names from the sentence. You can use these names to add the actors to the dictionaries.
+EXAMPLE INPUT:
 
-EXAMPLE SENTENCE:
-
-`Dr. Fauci warned governors that the pandemic could surge if masks are not worn.`
+`20200701 Dr. Fauci warned governors that the pandemic could surge if masks are not worn.`
 
 Run `python test_parse.py s`  (standard mode)
 
@@ -383,7 +387,7 @@ If the Petrarch coder does not find at least two actors in a sentence then it wi
 
 * Collect 'dead' sentences from the pipeline (sentences that did not generate any events).
 * Run the dead sentences through the sentence tester in "Null Actor Mode" which will identify the labels for the named entities that are missing from the dictionary (e.g. "Dr. Fauci").
-* Add the labels for Dr. Fauci (e.g. "Anthony Fauci", "Dr. Anthony Fauci" etc.) and any other missing named entities to the Actor/Agent dictionaries using the CAMEO coding scheme.
+* Add the labels and actor code for Dr. Fauci (e.g. "Anthony Fauci", "Dr. Anthony Fauci" etc.) and any other missing named entities to the Actor/Agent dictionaries using the CAMEO coding scheme.
 * Re-run the dead sentence through the tester to make sure the new Actor/Agent code is detected.
 
 See the documentation here for instructions on how to edit the dictionaries:
