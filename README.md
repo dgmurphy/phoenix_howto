@@ -1,13 +1,15 @@
 # Open Event Data Alliance Phoenix Pipeline Install & Test
 
-A step-by-step guide to running Phoenix for the purpose of updating the dictionaries for Actors, Agents, and Issues.
+A step-by-step guide to running Phoenix for the purpose of updating the dictionaries for Actors, Agents, Issues and Discards. 
 
 These instructions will set up the following tools:
 
 * MongoDB: a popular database tool
-* scraper: crawls RSS newsfeeds and stores the articles in a MongoDB database
-* stanford_pipeline: reads sentences from the articles in MongoDB and builds sentence parse trees using the Stanford Core NLP library.
-* phoenix_pipeline: reads the sentences and parse trees and uses the Petrarch 2 library to create coded events using the CAMEO codebook and the Actor,Agent, and Issues dictionaries.
+* OEDA scraper: crawls RSS newsfeeds and stores the articles in a MongoDB database
+* OEDA stanford_pipeline: reads sentences from the articles in MongoDB and builds sentence parse trees using the Stanford Core NLP library.
+* OEDA phoenix_pipeline: reads the sentences and parse trees and uses the Petrarch 2 library to create coded events using the CAMEO codebook and the Actor,Agent, and Issues dictionaries.
+
+Note: The Git repos listed here were originally forked from the OEDA Github account here: https://github.com/openeventdata. My versions have minor modifications to facilitate the dictionary update tasks (e.g. geocoding is removed, scraper's old ntlk library is included locally, Petrarch code is included in the Phoenix Pipeline, and a few other things.)
 
 ## PreRequisites
 
@@ -46,17 +48,20 @@ Check:
 ```python2 --version```
 
 ### Install Java 8
-TBD
+Tested with OpenJDK 8.
+
+`apt-get install openjdk-8-jdk`
+
+Check:
+
+`java -version`
 
 ### Make a project dir
 Create a directory for this project:
 
 ```mkdir oeda```
 
-### Notes on Forked Repos
 
-The Git repos listed here were originally forked from the OEDA Github account here:
-https://github.com/openeventdata
 
 ## Install MongoDB
 
