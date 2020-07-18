@@ -8,6 +8,8 @@ These instructions will set up the following tools:
 * OEDA scraper: crawls RSS newsfeeds and stores the articles in a MongoDB database
 * OEDA stanford_pipeline: reads sentences from the articles in MongoDB and builds sentence parse trees using the Stanford Core NLP library.
 * OEDA phoenix_pipeline: reads the sentences and parse trees and uses the Petrarch 2 library to create coded events using the CAMEO codebook and the Actor,Agent, and Issues dictionaries.
+* Actor Generator: similar to the phoenix pipeline but produces actor labels.
+* Sentence-Tester: runs the Petrarch coder on a list of sentences and produces events using either null actors mode or standard mode.
 
 Note: The Git repos listed here were originally forked from the OEDA Github account here: https://github.com/openeventdata. My versions have minor modifications to facilitate the dictionary update tasks (e.g. geocoding is removed, scraper's old ntlk library is included locally, Petrarch code is included in the Phoenix Pipeline, and a few other things.)
 
@@ -331,8 +333,14 @@ Open this file in LibreOffice to view it.  For the seperator options use:
 * String delimeter: '   (single quote)
 
 
+## Install and Test the Actor Generator
 
-## Use the Sentence Tester
+Follow the instructions at https://github.com/dgmurphy/phoenix_actor_gen.git to install and test the actor generator.
+
+Make sure you are in the oeda directory when cloning the project.
+
+
+## Install and Test the Sentence Tester
 
 The sentence tester will let you run the petrarch coder on a list of sentences in one of two modes:
 
@@ -386,16 +394,37 @@ If we add Dr. Fauci to the actor dictionary then this sentence will generate an 
 
 TODO: This sentence will also code an issue for PANDEMIC. Modify the output to show the coded issues.
 
+
+
 ## Learn How to Edit the Petrarch Dictionaries
 
-If the Petrarch coder does not find at least two actors in a sentence then it will not generate any events.  Many named entities that should count as actors or agents do not get coded because their names are not in the dictionary. To update these dictionaries we need to identify missing actors/agents and add them to the dictionary. The process will generally be as follows:
-
-* Collect 'dead' sentences from the pipeline (sentences that did not generate any events).
-* Run the dead sentences through the sentence tester in "Null Actor Mode" which will identify the labels for the named entities that are missing from the dictionary (e.g. "Dr. Fauci").
-* Add the labels and actor code for Dr. Fauci (e.g. "Anthony Fauci", "Dr. Anthony Fauci" etc.) and any other missing named entities to the Actor/Agent dictionaries using the CAMEO coding scheme.
-* Re-run the dead sentence through the tester to make sure the new Actor/Agent code is detected.
+If the Petrarch coder does not find at least two actors in a sentence then it will not generate any events.  Many named entities that should count as actors or agents do not get coded because their names are not in the dictionary. To update these dictionaries we need to identify missing actors/agents and add them to the dictionary. 
 
 See the documentation here for instructions on how to edit the dictionaries:
 
 https://petrarch.readthedocs.io/en/latest/dictionaries.html
 
+
+### Actor Dictionary Update Procedure
+
+1. Run scraper to get stories into MongoDB.
+1. Run stanford-pipeline to generate parse trees for the stories.
+1. Run phoenix-pipeline to generate a 'baseline' events file using the existing actor dictionary.
+1. Run actor-generator to generate an actor-label list for the stories.
+1. Review the actor-label list for uncoded actors and use the CAMEO codebook to create new actor codes.
+1. Update the actor dictionary in the sentence-tester project with the new actor codes.
+1. Update the sentence-tester input file with sentences from the actor-label list output.
+1. Run the sentence tester in standard mode to see if the updated actor dictionary succeeded. 
+1. Once the sentences are generating events in standard mode, merge the dictioanry updates into the phoenix-pipeline acotr dictionary.
+1. Re-run the phoenix-pipeline and compare the output to the baseline events list. The new events list should included addtional events for the newly-coded actors.
+
+Repeat this process daily to add new actors.
+
+
+
+Notes:
+* Scraper: Check to makes sure you are using the desired url whitelist for the target RSS Feeds.
+* Stanford-pipeline: Make sure the processort is configured to process all stories rather than a selected day.
+* Phoenix-Pipeline: Rename or copy the events files you want to keep so they don't get overwritten.
+* Actor-generator: Make sure to use the same run_date for boht the phoenix-pipeline and the actor-generator.
+* Sentence Tester: Running the sentence tester in standard mode should generate events for each sentence of the updates to the actor dictonary were done properly. If no events were generated, try running the sentence-tester in null actors mode to check the actor labels and fix the dictionary.
