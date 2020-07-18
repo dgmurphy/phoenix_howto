@@ -424,7 +424,8 @@ Repeat this process daily to add new actors.
 
 Notes:
 * Scraper: Check to makes sure you are using the desired url whitelist for the target RSS Feeds.
+* Scraper: If you add a new RSS feed to the whitelist you need to all the source label in the source_keys.txt file in the phoenix-pipeline.
 * Stanford-pipeline: Make sure the processort is configured to process all stories rather than a selected day.
 * Phoenix-Pipeline: Rename or copy the events files you want to keep so they don't get overwritten.
-* Actor-generator: Make sure to use the same run_date for boht the phoenix-pipeline and the actor-generator.
+* Actor-generator: Make sure to use the same run_date for both the phoenix-pipeline and the actor-generator.
 * Sentence Tester: Running the sentence tester in standard mode should generate events for each sentence of the updates to the actor dictonary were done properly. If no events were generated, try running the sentence-tester in null actors mode to check the actor labels and fix the dictionary.
