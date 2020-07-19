@@ -198,24 +198,9 @@ The sentence tester will let you run the petrarch coder on a list of sentences i
 
 ### Install
 
-Install the sentence tester in the oeda directory.
+Install the sentence tester in the oeda directory. Follow these instructions to install and test:
 
-``` 
-git clone https://github.com/dgmurphy/petrarch_sentence_tester.git
-cd petrarch_sentence_tester
-virtualenv -p /usr/bin/python2.7 venv
-source venv/bin/activate
-pip install -r requirements.txt
-```
-
-```
-cd stanford_corenlp_pywrapper
-wget http://nlp.stanford.edu/software/stanford-corenlp-full-2014-06-16.zip
-unzip stanford-corenlp-full-2014-06-16.zip
-mv stanford-corenlp-full-2014-06-16 stanford-corenlp
-cd stanford-corenlp
-wget http://nlp.stanford.edu/software/stanford-srparser-2014-07-01-models.jar
-```
+https://github.com/dgmurphy/petrarch_sentence_tester
 
 ### Use
 
