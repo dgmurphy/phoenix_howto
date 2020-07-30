@@ -250,7 +250,7 @@ https://petrarch.readthedocs.io/en/latest/dictionaries.html
 1. Update the actor dictionary in the sentence-tester project with the new actor codes.
 1. Update the sentence-tester input file with sentences from the actor-label list output.
 1. Run the sentence tester in standard mode to see if the updated actor dictionary succeeded. 
-1. Once the sentences are generating events in standard mode, merge the dictioanry updates into the phoenix-pipeline acotr dictionary.
+1. Once the sentences are generating events in standard mode, merge the dictionary updates into the phoenix-pipeline actor dictionary and also into the actor-generator actor dictionary.
 1. Re-run the phoenix-pipeline and compare the output to the baseline events list. The new events list should included addtional events for the newly-coded actors.
 
 Repeat this process daily, for the rest of your life, to add new actors.
